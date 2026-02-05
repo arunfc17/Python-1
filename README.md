@@ -1,39 +1,34 @@
-# DevOps Showcase
+# End-to-End DevOps CI/CD Pipeline Demo
 
-Small, opinionated end-to-end DevOps demo project showing:
-- Node.js sample microservice with Prometheus metrics
-- Docker multi-stage build and best practices
-- Helm chart for Kubernetes deployment
-- Terraform skeleton for cloud infra (AWS/EKS example)
-- GitHub Actions:
-  - CI (lint, test, build image, security scans)
-  - Terraform plan
-  - CD deploy to cluster
-- Security: hadolint, Trivy, eslint
-- Observability: Prometheus metrics endpoint
+## 🚀 Project Overview
+This repository demonstrates a real DevOps CI/CD workflow:
+- Jenkins builds a Docker image from the source code
+- The container runs a Python application automatically
+- All steps are version-controlled and reproducible
 
-Quickstart (local)
-1. Build and run locally:
-   - cd app
-   - npm ci
-   - npm start
-   - Visit http://localhost:3000/ and http://localhost:3000/metrics
+## 📦 Tools Used
+- Git & GitHub (Version Control)
+- Jenkins (CI/CD Orchestration)
+- Docker (Containerization)
+- Python Flask (Application)
 
-2. Build Docker image:
-   - docker build -t devops-showcase:local .
+## 🔁 Pipeline Flow
+1. Developer pushes code to GitHub
+2. Jenkins triggers pipeline
+3. Docker image is built
+4. Container runs the Python Flask app
 
-3. Helm deploy to cluster:
-   - helm upgrade --install devops-showcase ./helm -n devops --create-namespace
+## ⚠️ Challenges & Fixes
+### 🔹 Docker Port Conflicts
+- Containers sometimes failed due to port 5000 already in use
+- Fixed by removing old containers before running new ones
 
-CI / CD
-- The GitHub Actions workflows build/test and push images to GitHub Container Registry (ghcr.io) and run Terraform plan.
-- Configure required GitHub secrets listed in README before enabling workflows.
+### 🔹 Jenkins Pipeline Errors
+- Initial pipeline failures due to permission issues
+- Fixed using proper Docker permissions for Jenkins
 
-Project layout
-- app/: Node.js application, tests, Dockerfile
-- helm/: Helm chart for deployment
-- infra/: Terraform scaffold for provisioning cloud infra (modules/eks)
-- .github/workflows/: CI, TF plan and CD workflows
-- scripts/: convenience scripts for local bootstrap and cleanup
-
-License: MIT
+## 🧪 How To Run Locally
+1. Clone repo
+2. Build image:
+```bash
+docker build -t python-devops-app .
